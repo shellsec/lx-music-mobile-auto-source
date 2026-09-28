@@ -5,6 +5,9 @@ import { updateSetting } from './common'
 import settingState from '@/store/setting/state'
 import { destroyUserApi, setUserApi } from './userApi'
 import apiSourceInfo from '@/utils/musicSdk/api-source-info'
+import { BUILTIN_USER_API_IDS, USER_API_AUTO_ID } from '@/sources/builtin'
+import { setLoadedBuiltinId } from '@/sources/builtin/ensure'
+import { activateAutoUserApi } from './userApiFailover'
 
 
 export const setApiSource = (apiId: string) => {
@@ -17,8 +20,19 @@ export const setApiSource = (apiId: string) => {
       }
     })
   }
-  if (/^user_api/.test(apiId)) {
-    setUserApi(apiId).catch(err => {
+  if (apiId === USER_API_AUTO_ID) {
+    // 「自动切换」：加载优先内置自定义音源脚本，setting 记为 auto
+    activateAutoUserApi().catch(err => {
+      if (!global.lx.apiInitPromise[1]) global.lx.apiInitPromise[2](false)
+      console.log(err)
+      let api = apiSourceInfo.find(api => !api.disabled)
+      if (!api) return
+      if (api.id != settingState.setting['common.apiSource']) setApiSource(api.id)
+    })
+  } else if (/^user_api/.test(apiId)) {
+    setUserApi(apiId).then(() => {
+      if (BUILTIN_USER_API_IDS.includes(apiId)) setLoadedBuiltinId(apiId)
+    }).catch(err => {
       if (!global.lx.apiInitPromise[1]) global.lx.apiInitPromise[2](false)
       console.log(err)
       let api = apiSourceInfo.find(api => !api.disabled)

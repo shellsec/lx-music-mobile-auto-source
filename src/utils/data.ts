@@ -1,5 +1,6 @@
 import { getData, saveData, getAllKeys, removeDataMultiple, saveDataMultiple, removeData, getDataMultiple } from '@/plugins/storage'
 import { DEFAULT_SETTING, LIST_IDS, storageDataPrefix, type NAV_ID_Type } from '@/config/constant'
+import { BUILTIN_USER_API_IDS, USER_API_AUTO_ID, getBuiltinScript } from '@/sources/builtin'
 import { throttle } from './common'
 // import { gzip, ungzip } from '@/utils/nativeModules/gzip'
 // import { readFile, writeFile, temporaryDirectoryPath, unlink } from '@/utils/fs'
@@ -519,8 +520,29 @@ export const getUserApiList = async(): Promise<LX.UserApi.UserApiInfo[]> => {
   return [...userApis]
 }
 export const getUserApiScript = async(id: string): Promise<string> => {
+  // 内置自定义音源：优先返回仓库内打包的脚本，避免存储被清空后无法播放
+  const builtin = getBuiltinScript(id)
+  if (builtin) return builtin
+  // 兼容旧版单一 Flower id
+  if (id === 'user_api_flower_builtin') {
+    const legacy = getBuiltinScript('user_api_builtin_flower')
+    if (legacy) return legacy
+  }
   const script = await getData<string>(`${userApiPrefix}${id}`) ?? ''
   return script
+}
+
+/** 写入/更新内置自定义音源（固定 id，启动时覆盖脚本） */
+export const saveBuiltinUserApi = async(info: LX.UserApi.UserApiInfo, script: string): Promise<LX.UserApi.UserApiInfo[]> => {
+  if (!userApis.length) userApis = await getData<LX.UserApi.UserApiInfo[]>(userApiPrefix) ?? []
+  const idx = userApis.findIndex(api => api.id === info.id)
+  if (idx >= 0) userApis[idx] = { ...userApis[idx], ...info }
+  else userApis.unshift(info)
+  await saveDataMultiple([
+    [userApiPrefix, userApis],
+    [`${userApiPrefix}${info.id}`, script],
+  ])
+  return [...userApis]
 }
 
 const INFO_NAMES = {
@@ -572,12 +594,14 @@ export const addUserApi = async(script: string): Promise<LX.UserApi.UserApiInfo>
 }
 export const removeUserApi = async(ids: string[]) => {
   if (!userApis) return []
+  // 内置自定义音源 / 自动切换不允许删除
+  const protectedIds = new Set([USER_API_AUTO_ID, 'user_api_flower_builtin', ...BUILTIN_USER_API_IDS])
+  const removeIds = ids.filter(id => !protectedIds.has(id))
   const _ids: string[] = []
   for (let index = userApis.length - 1; index > -1; index--) {
-    if (ids.includes(userApis[index].id)) {
+    if (removeIds.includes(userApis[index].id)) {
       _ids.push(`${userApiPrefix}${userApis[index].id}`)
       userApis.splice(index, 1)
-      ids.splice(index, 1)
     }
   }
   await saveData(userApiPrefix, userApis)

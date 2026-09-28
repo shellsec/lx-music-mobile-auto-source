@@ -299,16 +299,30 @@ export const handleGetOnlineMusicUrl = async({ musicInfo, quality, onToggleSourc
   // console.log(musicInfo.source)
   const targetQuality = quality ?? getPlayQuality(settingState.setting['player.playQuality'], musicInfo)
 
-  let reqPromise
-  try {
-    reqPromise = musicSdk[musicInfo.source].getMusicUrl(toOldMusicInfo(musicInfo), targetQuality).promise
-  } catch (err: any) {
-    reqPromise = Promise.reject(err)
+  const tryOnce = async(): Promise<{ url: string, type: LX.Quality }> => {
+    let reqPromise
+    try {
+      reqPromise = musicSdk[musicInfo.source].getMusicUrl(toOldMusicInfo(musicInfo), targetQuality).promise
+    } catch (err: any) {
+      reqPromise = Promise.reject(err)
+    }
+    return reqPromise
   }
-  return reqPromise.then(({ url, type }: { url: string, type: LX.Quality }) => {
+
+  return tryOnce().then(({ url, type }: { url: string, type: LX.Quality }) => {
     return { musicInfo, url, quality: type, isFromCache: false }
   }).catch(async(err: any) => {
     console.log(err)
+    // 仅在「取播放地址」层：当前自定义源失败后按序切换内置源重试同一首歌
+    try {
+      const { isAutoOrBuiltinApiSource, tryBuiltinMusicUrlFailover } = await import('@/core/userApiFailover')
+      if (isAutoOrBuiltinApiSource()) {
+        const result = await tryBuiltinMusicUrlFailover(tryOnce)
+        return { musicInfo, url: result.url, quality: result.type, isFromCache: false }
+      }
+    } catch (failoverErr: any) {
+      console.log('[userApi failover]', failoverErr?.message ?? failoverErr)
+    }
     if (!allowToggleSource || err.message == requestMsg.tooManyRequests) throw err
     onToggleSource()
     // eslint-disable-next-line @typescript-eslint/promise-function-async

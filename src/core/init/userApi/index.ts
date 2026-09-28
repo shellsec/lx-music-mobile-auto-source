@@ -5,6 +5,8 @@ import BackgroundTimer from 'react-native-background-timer'
 import { fetchData } from './request'
 import { getUserApiList } from '@/utils/data'
 import { confirmDialog, openUrl, tipDialog } from '@/utils/tools'
+import { BUILTIN_USER_API_IDS, USER_API_AUTO_ID } from '@/sources/builtin'
+import { setLoadedBuiltinId } from '@/sources/builtin/ensure'
 
 
 export default async(setting: LX.AppSetting) => {
@@ -74,8 +76,15 @@ export default async(setting: LX.AppSetting) => {
   const handleStateChange = ({ status, errorMessage, info }: InitParams) => {
     // console.log(status, message, info)
     setUserApiStatus(status, errorMessage)
-    if (!info || info.id !== settingState.setting['common.apiSource']) return
+    const settingId = settingState.setting['common.apiSource']
+    // auto 模式下实际 load 的是具体 builtin id，允许匹配
+    const matched = !!info && (
+      info.id === settingId ||
+      (settingId === USER_API_AUTO_ID && BUILTIN_USER_API_IDS.includes(info.id))
+    )
+    if (!matched) return
     if (status) {
+      if (BUILTIN_USER_API_IDS.includes(info.id)) setLoadedBuiltinId(info.id)
       if (info.sources) {
         let apis: any = {}
         let qualitys: LX.QualityList = {}

@@ -1,3 +1,65 @@
+**语言 / Language:** 中文 | [English](./README.en.md)
+
+[aiv123.com](https://aiv123.com/) · AI 工具导航，600+ 工具一网打尽
+
+## 🚀 推荐使用 [ofox.ai](https://ofox.io/x/aiv123)
+
+> **一句话**：一个账号直达最新 GPT / Claude / Gemini 等 **100+** 顶尖模型，首充额外赠 **$3** 额度。
+
+文本、图像、视频、向量一站调用；支持缓存，重复请求更省更快。
+
+[👉 注册领取](https://ofox.io/x/aiv123) · 全球专线 · 企业级 SLA · 不留存对话
+
+| ⚡️ 极速更省 | 🧠 模型与模态 | 🛡️ 隐私安全 |
+|:---:|:---:|:---:|
+| 全球专线，企业级 SLA，支持缓存 | 100+ 模型 · 文本 / 图像 / 视频 / 向量 | 不留存任何对话 |
+
+## ☕ 请我喝可乐
+
+开源不易，欢迎赞助支持：  
+👉 [爱发电](https://ifdian.net/a/shellsec)
+
+---
+
+# lx-music-mobile-auto-source
+
+本仓库基于官方 [lx-music-mobile](https://github.com/lyswhut/lx-music-mobile) **v1.9.1**，在保留上游完整历史的前提下，增加内置音源与播放失败自动切换，并调整若干开箱默认设置。
+
+## 这个仓库多了什么 / 优点
+
+相对官方 lx-music-mobile v1.9.1：
+
+1. **内置多套音源**：安装后即可使用，不必再自行寻找并导入音源脚本。
+2. **播放取地址失败时自动切换**：按内置音源顺序依次尝试，全部失败才停止。
+3. **默认音源为自动切换**（`user_api_auto`）。
+4. **新安装默认已同意许可协议**，不再被协议弹窗拦住。
+5. **不再弹出「谨防被骗」**提示。
+6. **冷启动不自动检查官方更新**，避免一键升到官方版后丢掉本仓库改动；设置里仍可手动检查更新。
+7. **默认打开**搜索热搜、搜索历史、点列表即播。
+
+### 使用边界（避免误解）
+
+- 手动选中某个内置源后，失败时仍会尝试其他内置源。
+- 脚本返回空地址或非 `http` 地址时，不会触发这套切换。
+- 已经拿到播放地址之后的 403 / 卡死等，不会走这套切换。
+- 通知权限、电池优化等仍需在系统设置里由用户自行授权。
+- 本仓库安装包为本机 **debug 签名**，与官网原版不是同一个包（hash 也不同）。
+
+## 版本与下载
+
+- 基于官方 **v1.9.1**
+- 安装包文件名：
+  - `lx-music-mobile-v1.9.1-arm64-v8a.apk`
+  - `lx-music-mobile-v1.9.1-armeabi-v7a.apk`
+  - `lx-music-mobile-v1.9.1-universal.apk`
+  - `lx-music-mobile-v1.9.1-x86.apk`
+  - `lx-music-mobile-v1.9.1-x86_64.apk`
+- 下载：[本仓库 Releases](https://github.com/shellsec/lx-music-mobile-auto-source/releases)（APK 不放入 git，以 Release 附件提供）
+
+常见问题仍可参考上游文档：[移动版常见问题](https://lyswhut.github.io/lx-music-doc/mobile/faq)。
+
+---
+
 <p align="center"><a href="https://github.com/lyswhut/lx-music-mobile"><img width="200" src="https://github.com/lyswhut/lx-music-mobile/blob/master/doc/images/icon.png" alt="lx-music logo"></a></p>
 
 <h1 align="center">LX Music 移动版</h1>
@@ -31,17 +93,17 @@
 
 软件变化请查看[更新日志](https://github.com/lyswhut/lx-music-mobile/blob/master/CHANGELOG.md)。
 
-软件下载请查看 [GitHub Releases](https://github.com/lyswhut/lx-music-mobile/releases)。
+上游官方下载请查看 [GitHub Releases](https://github.com/lyswhut/lx-music-mobile/releases)；本 fork 的安装包见[本仓库 Releases](https://github.com/shellsec/lx-music-mobile-auto-source/releases)。
 
 使用常见问题请参阅[移动版常见问题](https://lyswhut.github.io/lx-music-doc/mobile/faq)。
 
-目前本项目的原始发布地址只有 [**GitHub**](https://github.com/lyswhut/lx-music-mobile/releases)，其他渠道均为第三方转载发布，与本项目无关！
+目前上游项目的原始发布地址只有 [**GitHub**](https://github.com/lyswhut/lx-music-mobile/releases)，其他渠道均为第三方转载发布，与上游项目无关！
 
 为了提高使用门槛，本软件内的默认设置、UI 操作不以新手友好为目标，所以使用前建议先根据你的喜好浏览调整一遍软件设置，阅读一遍[音乐播放列表机制](https://lyswhut.github.io/lx-music-doc/mobile/faq/playlist)。
 
 ### 数据同步服务
 
-从 v1.0.0 起，我们发布了一个独立的[数据同步服务](https://github.com/lyswhut/lx-music-sync-server#readme)。如果你有服务器，可以将其部署到服务器上作为私人多端同步服务使用，详情看该项目说明。
+从 v1.0.0 起，上游发布了一个独立的[数据同步服务](https://github.com/lyswhut/lx-music-sync-server#readme)。如果你有服务器，可以将其部署到服务器上作为私人多端同步服务使用，详情看该项目说明。
 
 ## 贡献代码
 
