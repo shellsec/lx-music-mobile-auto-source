@@ -31,6 +31,14 @@ This repository is based on upstream LX Music Mobile ([lx-music-mobile](https://
 
 Open the app after install and you’re set: in Settings → Custom Sources, **Auto-switch** is already selected and shows initialization succeeded. Built-in sources — 野花, 六音, Huibq, ikun, 野草, 综合 API, 全都要 — are already in the list. No hunting for scripts, no import step. Song lists (Latest / Hottest) show up right away without configuring sources first. In short: **install and play.**
 
+Settings: Auto-switch is selected and shows initialization succeeded:
+
+![Settings: Auto-switch initialized](./docs/screenshots/settings-auto-source.jpg)
+
+Playlists: Latest / Hottest lists show up right away:
+
+![Playlists ready after install](./docs/screenshots/playlists.jpg)
+
 ## What’s different / Advantages
 
 Compared with official lx-music-mobile v1.9.1:
