@@ -27,6 +27,10 @@ This repository is based on upstream [lx-music-mobile](https://github.com/lyswhu
 
 > For the full upstream documentation (build notes, contribution guide, license supplement, etc.), see the Chinese [README.md](./README.md). This English file focuses on what this fork adds.
 
+### Install and play
+
+Open the app after install and you’re set: in Settings → Custom Sources, **Auto-switch** is already selected and shows initialization succeeded. Built-in sources — 野花, 六音, Huibq, ikun, 野草, 综合 API, 全都要 — are already in the list. No hunting for scripts, no import step. Song lists (Latest / Hottest) show up right away without configuring sources first. In short: **install and play.**
+
 ## What’s different / Advantages
 
 Compared with official lx-music-mobile v1.9.1:
