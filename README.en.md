@@ -21,9 +21,9 @@ Open source takes effort — sponsorship is welcome:
 
 ---
 
-# lx-music-mobile-auto-source
+# Luoxue Music Auto Source
 
-This repository is based on upstream [lx-music-mobile](https://github.com/lyswhut/lx-music-mobile) **v1.9.1**, keeping the full upstream history, and adds built-in music sources with playback URL failover, plus a few out-of-box default tweaks.
+This repository is based on upstream LX Music Mobile ([lx-music-mobile](https://github.com/lyswhut/lx-music-mobile)) **v1.9.1**, keeping the full upstream history, and adds built-in music sources with playback URL failover, plus a few out-of-box default tweaks. This fork is **Luoxue Music Auto Source** — auto sources by name, install-and-play by experience.
 
 > For the full upstream documentation (build notes, contribution guide, license supplement, etc.), see the Chinese [README.md](./README.md). This English file focuses on what this fork adds.
 
