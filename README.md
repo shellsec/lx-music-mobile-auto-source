@@ -37,6 +37,18 @@
 
 ![歌单：打开即可浏览](./docs/screenshots/playlists.jpg)
 
+### 下载
+
+国内可用 [gh-proxy](https://gh-proxy.org/) 加速。官方 Release 页（不加速）：[v1.9.1-auto-source](https://github.com/shellsec/lx-music-mobile-auto-source/releases/tag/v1.9.1-auto-source)。
+
+本仓库安装包为本机 **debug 签名**，与官网原版不是同一个包（hash 也不同）。
+
+- **arm64-v8a**（常见手机，优先）：[加速下载](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-arm64-v8a.apk) · sha256 `1bac71838c3fa7092143ed14f1cab5307482e0b5f6ef6ee92b6bd5ceee47b568`
+- **armeabi-v7a**：[加速下载](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-armeabi-v7a.apk) · sha256 `d175d0eeae31dc561cd3dc1b9f0e4761077b5da6e02d858e47d708e51172372c`
+- **universal**：[加速下载](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-universal.apk) · sha256 `cb60f3c577442bf173d26b528c613ae6e96a4d7403f819a18a208cd7fd91f526`
+- **x86**：[加速下载](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-x86.apk) · sha256 `79d9ca428fbda5c5694c28abb1c4f89a1944c03f5e9c389034e10850b93dd4f6`
+- **x86_64**：[加速下载](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-x86_64.apk) · sha256 `8b58559f9ddd790affeb7d486b5e25aa15279acca04df5176a8a7b391213d1ea`
+
 ## 这个仓库多了什么 / 优点
 
 相对官方 lx-music-mobile v1.9.1：
@@ -57,16 +69,9 @@
 - 通知权限、电池优化等仍需在系统设置里由用户自行授权。
 - 本仓库安装包为本机 **debug 签名**，与官网原版不是同一个包（hash 也不同）。
 
-## 版本与下载
+## 版本说明
 
-- 基于官方 **v1.9.1**
-- 安装包文件名：
-  - `lx-music-mobile-v1.9.1-arm64-v8a.apk`
-  - `lx-music-mobile-v1.9.1-armeabi-v7a.apk`
-  - `lx-music-mobile-v1.9.1-universal.apk`
-  - `lx-music-mobile-v1.9.1-x86.apk`
-  - `lx-music-mobile-v1.9.1-x86_64.apk`
-- 下载：[本仓库 Releases](https://github.com/shellsec/lx-music-mobile-auto-source/releases)（APK 不放入 git，以 Release 附件提供）
+基于官方 **v1.9.1**。安装包下载与 SHA256 见上方「下载」一节（APK 不放入 git，以 Release 附件提供）。
 
 常见问题仍可参考上游文档：[移动版常见问题](https://lyswhut.github.io/lx-music-doc/mobile/faq)。
 
