@@ -45,11 +45,11 @@ In China you can use [gh-proxy](https://gh-proxy.org/) for faster downloads. Off
 
 Packages in this repo are signed with the local **debug** keystore; they are not the same package as the official release (hashes differ).
 
-- **arm64-v8a** (common phones, preferred): [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-arm64-v8a.apk) · sha256 `1bac71838c3fa7092143ed14f1cab5307482e0b5f6ef6ee92b6bd5ceee47b568`
-- **armeabi-v7a**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-armeabi-v7a.apk) · sha256 `d175d0eeae31dc561cd3dc1b9f0e4761077b5da6e02d858e47d708e51172372c`
-- **universal**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-universal.apk) · sha256 `cb60f3c577442bf173d26b528c613ae6e96a4d7403f819a18a208cd7fd91f526`
-- **x86**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-x86.apk) · sha256 `79d9ca428fbda5c5694c28abb1c4f89a1944c03f5e9c389034e10850b93dd4f6`
-- **x86_64**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-x86_64.apk) · sha256 `8b58559f9ddd790affeb7d486b5e25aa15279acca04df5176a8a7b391213d1ea`
+- **arm64-v8a** (common phones, preferred): [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-arm64-v8a.apk) · sha256 `0da8446bb500426a20e37634e24fec4e66a90231f1ee8fcbf4c9f8f84da3ddd7`
+- **armeabi-v7a**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-armeabi-v7a.apk) · sha256 `32058638e349f51af50eecb6dae593f4b42eb40d1e8b3da7fbac421248becdf4`
+- **universal**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-universal.apk) · sha256 `275222c771437d8b4c074f22f364bbaaf7978dcad1244bd52e2305772b0e6104`
+- **x86**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-x86.apk) · sha256 `3fa466761f8890aedb510640b8503ffa729266c8d4bbf9cb6c3cf1b10abe96d6`
+- **x86_64**: [Accelerated download](https://gh-proxy.org/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1-auto-source/lx-music-mobile-v1.9.1-x86_64.apk) · sha256 `8d3cad6d3f2ca6d7f23f7a0e46780b5d197aa78320eee824cb28229e2df25c8d`
 
 ## What’s different / Advantages
 

@@ -7,6 +7,7 @@ import { getUserApiList } from '@/utils/data'
 import { confirmDialog, openUrl, tipDialog } from '@/utils/tools'
 import { BUILTIN_USER_API_IDS, USER_API_AUTO_ID } from '@/sources/builtin'
 import { setLoadedBuiltinId } from '@/sources/builtin/ensure'
+import { getExpectedBuiltinLoadId } from '@/core/userApiFailover'
 
 
 export default async(setting: LX.AppSetting) => {
@@ -75,6 +76,8 @@ export default async(setting: LX.AppSetting) => {
   }
   const handleStateChange = ({ status, errorMessage, info }: InitParams) => {
     // console.log(status, message, info)
+    const expectedId = getExpectedBuiltinLoadId()
+    if (expectedId && info?.id !== expectedId) return
     setUserApiStatus(status, errorMessage)
     const settingId = settingState.setting['common.apiSource']
     // auto 模式下实际 load 的是具体 builtin id，允许匹配

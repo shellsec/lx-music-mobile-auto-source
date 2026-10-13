@@ -11,25 +11,64 @@ import {
   setPreferredBuiltinId,
 } from '@/sources/builtin/ensure'
 
+let initGeneration = 0
+/** 这次 load 期望的内置源。对不上的初始化事件丢掉，避免上一轮把下一轮结束掉。 */
+let expectedBuiltinLoadId: string | null = null
+/** 当前这扇门闩最后一次结束时是不是成功。失败或超时记成 false。 */
+let initGateOpen = false
+
+export const getExpectedBuiltinLoadId = () => expectedBuiltinLoadId
+export const setExpectedBuiltinLoadId = (id: string | null) => {
+  expectedBuiltinLoadId = id
+}
+
 const waitApiReady = async(timeoutMs = 25_000) => {
-  const ok = await Promise.race([
-    global.lx.apiInitPromise[0],
-    new Promise<boolean>((resolve) => {
-      setTimeout(() => { resolve(false) }, timeoutMs)
-    }),
-  ])
-  return ok
+  const generation = initGeneration
+  const pending = global.lx.apiInitPromise[0]
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const timeout = new Promise<boolean>((resolve) => {
+    timer = setTimeout(() => {
+      // 超时也要把这一代门闩结束掉，不能留下永远 pending 的 Promise
+      if (generation === initGeneration && !global.lx.apiInitPromise[1]) {
+        global.lx.apiInitPromise[2](false)
+      }
+      resolve(false)
+    }, timeoutMs)
+  })
+  try {
+    return await Promise.race([pending, timeout])
+  } finally {
+    if (timer != null) clearTimeout(timer)
+  }
 }
 
 const resetApiInitPromise = () => {
-  if (!global.lx.apiInitPromise[1]) return
+  // 上一轮还没结束就先结束掉，下一轮换一个新 Promise，不能继续等上一轮
+  if (!global.lx.apiInitPromise[1]) global.lx.apiInitPromise[2](false)
+  const generation = ++initGeneration
   global.lx.apiInitPromise[0] = new Promise((resolve) => {
     global.lx.apiInitPromise[1] = false
     global.lx.apiInitPromise[2] = (result: boolean) => {
+      if (generation !== initGeneration) return
       global.lx.apiInitPromise[1] = true
+      initGateOpen = result
       resolve(result)
     }
   })
+}
+
+/**
+ * 全部内置源都失败后，把门闩收成可以继续播。
+ * 初始化失败时是 false，超时则已经在 waitApiReady 里结束。
+ * 若仍是失败，换成已完成的 true，当前这首歌才能走原来的平台换源，
+ * 下一首也不会被 source init failed 挡住。设置保持不动。
+ */
+const releaseInitGateAfterBuiltinFailure = () => {
+  if (!global.lx.apiInitPromise[1]) global.lx.apiInitPromise[2](true)
+  if (initGateOpen) return
+  global.lx.apiInitPromise[0] = Promise.resolve(true)
+  global.lx.apiInitPromise[1] = true
+  initGateOpen = true
 }
 
 /**
@@ -38,7 +77,9 @@ const resetApiInitPromise = () => {
  */
 export const loadBuiltinUserApi = async(apiId: string) => {
   if (!BUILTIN_USER_API_IDS.includes(apiId)) throw new Error('not builtin api')
+  setExpectedBuiltinLoadId(apiId)
   if (getLoadedBuiltinId() === apiId && global.lx.apis && Object.keys(global.lx.apis).length) {
+    if (!global.lx.apiInitPromise[1]) global.lx.apiInitPromise[2](true)
     return true
   }
   resetApiInitPromise()
@@ -68,13 +109,15 @@ export const isAutoOrBuiltinApiSource = (apiId = settingState.setting['common.ap
  * 仅包在取播放地址层，不改变榜单/搜索。
  */
 export const tryBuiltinMusicUrlFailover = async(
-  tryOnce: () => Promise<{ url: string, type: LX.Quality }>
+  tryOnce: () => Promise<{ url: string, type: LX.Quality }>,
 ): Promise<{ url: string, type: LX.Quality }> => {
   const settingId = settingState.setting['common.apiSource']
   // 固定选中某个内置源时，也允许失败后自动试其余内置源
   if (!isAutoOrBuiltinApiSource(settingId)) throw new Error('not auto mode')
 
-  const current = getLoadedBuiltinId() || (settingId === USER_API_AUTO_ID ? resolveInitialBuiltinId() : settingId)
+  const loadedId = getLoadedBuiltinId()
+  // 自动模式且没有已加载的内置源时，不排除清单头，下一首可以从头再试
+  const current = loadedId ?? (settingId === USER_API_AUTO_ID ? '' : settingId)
   const order = getBuiltinFailoverOrder(current ? [current] : [])
   let lastErr: Error | null = null
 
@@ -97,5 +140,6 @@ export const tryBuiltinMusicUrlFailover = async(
       console.log('[userApi failover] fail', id, lastErr.message)
     }
   }
+  releaseInitGateAfterBuiltinFailure()
   throw lastErr ?? new Error('all builtin sources failed')
 }

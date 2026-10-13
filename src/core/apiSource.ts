@@ -7,10 +7,12 @@ import { destroyUserApi, setUserApi } from './userApi'
 import apiSourceInfo from '@/utils/musicSdk/api-source-info'
 import { BUILTIN_USER_API_IDS, USER_API_AUTO_ID } from '@/sources/builtin'
 import { setLoadedBuiltinId } from '@/sources/builtin/ensure'
-import { activateAutoUserApi } from './userApiFailover'
+import { activateAutoUserApi, setExpectedBuiltinLoadId } from './userApiFailover'
 
 
 export const setApiSource = (apiId: string) => {
+  // 手动换源时丢掉上一轮内置源的期望 id，避免新脚本的初始化被滤掉
+  setExpectedBuiltinLoadId(apiId !== USER_API_AUTO_ID && /^user_api/.test(apiId) ? apiId : null)
   if (global.lx.apiInitPromise[1]) {
     global.lx.apiInitPromise[0] = new Promise(resolve => {
       global.lx.apiInitPromise[1] = false
