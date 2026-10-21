@@ -1,0 +1,10 @@
+LX Music Enhanced / 洛雪增强版
+Based on LX Music by lyswhut (https://github.com/lyswhut/lx-music)
+and LX Music Mobile (https://github.com/lyswhut/lx-music-mobile).
+Original copyright and attribution notices in upstream source files are retained.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Modifications: removed bundled source scripts and preset source addresses;
+custom sources start empty; multi-source switching is opt-in and follows
+user list order; catalog updates use only a saved user-supplied URL, with automatic failure recovery;
+updated application branding, documentation and release checks.
