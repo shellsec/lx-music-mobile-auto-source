@@ -8,17 +8,19 @@
 
 [GitHub Release 页面](https://github.com/shellsec/lx-music-mobile-auto-source/releases)
 
-以下为 **`v1.9.1`** 的各架构安装包，均不包含内置音源。常见 Android 手机可优先选择 arm64-v8a；不确定架构时可选择 universal 通用包。
+以下为 **`v1.9.2`** 的各架构安装包，均不包含内置音源。常见 Android 手机可优先选择 arm64-v8a；不确定架构时可选择 universal 通用包。
 
-| 架构 | 原始下载 | 加速下载 |
-| --- | --- | --- |
-| arm64-v8a（常见 Android 手机） | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-arm64-v8a.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-arm64-v8a.apk) |
-| armeabi-v7a（32 位设备） | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-armeabi-v7a.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-armeabi-v7a.apk) |
-| universal（通用包） | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-universal.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-universal.apk) |
-| x86_64 | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86_64.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86_64.apk) |
-| x86 | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86.apk) |
+| 架构 | 原始下载 | 加速下载 | 二维码 |
+| --- | --- | --- | --- |
+| arm64-v8a（常见 Android 手机） | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-arm64-v8a.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-arm64-v8a.apk) | [生成二维码](docs/download-qrs/v1.9.2-arm64-v8a.png) |
+| armeabi-v7a（32 位设备） | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-armeabi-v7a.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-armeabi-v7a.apk) | [生成二维码](docs/download-qrs/v1.9.2-armeabi-v7a.png) |
+| universal（通用包） | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-universal.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-universal.apk) | [生成二维码](docs/download-qrs/v1.9.2-universal.png) |
+| x86_64 | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86_64.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86_64.apk) | [生成二维码](docs/download-qrs/v1.9.2-x86_64.png) |
+| x86 | [GitHub 下载](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86.apk) | [加速下载](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86.apk) | [生成二维码](docs/download-qrs/v1.9.2-x86.png) |
 
 加速下载由第三方 [下载加速服务](https://ghfast.top/) 提供。后续版本可在该页面粘贴对应 APK 的 GitHub 下载链接。本项目不在软件中内置下载代理或音源地址。
+
+点击每行右侧的「生成二维码」可查看该架构的下载二维码，扫码内容为同一行的完整 APK 加速下载地址。二维码为本地生成的静态图片。
 
 ## 导入自定义源
 
@@ -29,6 +31,14 @@
 以下为自定义源管理的操作示意。列表中的内容由用户自行导入，不代表软件内置或推荐的来源；不同客户端版本的布局和按钮名称可能不同。
 
 ![自定义源管理操作示意](docs/screenshots/custom-source-management.png)
+
+## 快速添加
+
+设置中的「快速添加自定义源」支持扫一扫、从图片识别和粘贴链接。识别后需选择「导入单个源」或「添加订阅清单」，确认地址及「添加后启用」选项，再点击确认添加。二维码须包含完整 HTTP / HTTPS 地址；仅从可信来源导入脚本。
+
+也可点击「启用 HTTP 网页」，让另一部手机连接同一个允许设备互访的 Wi-Fi，扫描应用显示的二维码，直接在浏览器中填写地址；电脑手动打开显示的地址时需要六位配对码。网页提交后在当前设备完成导入，订阅沿用播放失败时自动检查更新的规则。
+
+二维码包含临时访问凭证，请勿公开分享。服务仅绑定局域网地址，10 分钟后、切到后台或离开设置时关闭；重新开启后须重新扫码或配对。没有相机的设备仍可用图片识别、粘贴链接及网页添加。局域网 HTTP 不加密，请仅在可信网络使用。
 
 ## 多源自动切换
 

@@ -1,22 +1,30 @@
 # LX Music Enhanced
 
+## Quick source entry
+
+Android settings support camera QR scanning, QR recognition from an image and pasting links. Confirm whether the address is a single script or a subscription catalog before adding it; enabling an imported script runs it in the app. Only import trusted content.
+
+Enable the temporary HTTP page to configure this device from another phone or computer on the same reachable Wi-Fi network. Scan the displayed QR to open the browser page directly, or enter the displayed address and six-digit pairing code manually. The QR contains a temporary credential: do not share it. The service closes after ten minutes, when the app enters the background, or when leaving settings. HTTP is unencrypted; use a trusted network. No camera is required for image recognition, pasted links or browser configuration.
+
 A derivative of [lyswhut/lx-music](https://github.com/lyswhut/lx-music) and [lx-music-mobile](https://github.com/lyswhut/lx-music-mobile), licensed under Apache-2.0. Original copyright notices are retained. See NOTICE for modifications.
 
 ## APK downloads
 
 [GitHub Releases](https://github.com/shellsec/lx-music-mobile-auto-source/releases)
 
-Download **`v1.9.1`** for your device below. These APKs contain no bundled music sources. Choose arm64-v8a for most Android phones, or universal if unsure.
+Download **`v1.9.2`** for your device below. These APKs contain no bundled music sources. Choose arm64-v8a for most Android phones, or universal if unsure.
 
-| Architecture | Original download | Accelerated download |
-| --- | --- | --- |
-| arm64-v8a | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-arm64-v8a.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-arm64-v8a.apk) |
-| armeabi-v7a | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-armeabi-v7a.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-armeabi-v7a.apk) |
-| universal | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-universal.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-universal.apk) |
-| x86_64 | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86_64.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86_64.apk) |
-| x86 | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.1/lx-music-mobile-v1.9.1-x86.apk) |
+| Architecture | Original download | Accelerated download | QR code |
+| --- | --- | --- | --- |
+| arm64-v8a | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-arm64-v8a.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-arm64-v8a.apk) | [Generate QR code](docs/download-qrs/v1.9.2-arm64-v8a.png) |
+| armeabi-v7a | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-armeabi-v7a.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-armeabi-v7a.apk) | [Generate QR code](docs/download-qrs/v1.9.2-armeabi-v7a.png) |
+| universal | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-universal.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-universal.apk) | [Generate QR code](docs/download-qrs/v1.9.2-universal.png) |
+| x86_64 | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86_64.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86_64.apk) | [Generate QR code](docs/download-qrs/v1.9.2-x86_64.png) |
+| x86 | [GitHub](https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86.apk) | [Accelerated download](https://ghfast.top/https://github.com/shellsec/lx-music-mobile-auto-source/releases/download/v1.9.2/lx-music-mobile-v1.9.2-x86.apk) | [Generate QR code](docs/download-qrs/v1.9.2-x86.png) |
 
 Acceleration is provided by a third-party [download service](https://ghfast.top/). For future versions, paste the corresponding APK's GitHub download URL into that page. No download proxy or source address is bundled in the app.
+
+Each QR link opens a locally generated static image containing that row's complete accelerated APK download URL.
 
 ## Import custom sources
 

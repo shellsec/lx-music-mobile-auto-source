@@ -10,6 +10,7 @@ import com.reactnativenavigation.react.NavigationReactNativeHost;
 import java.util.List;
 
 import cn.toside.music.mobile.cache.CachePackage;
+import cn.toside.music.mobile.sourceEntry.SourceEntryPackage;
 import cn.toside.music.mobile.crypto.CryptoPackage;
 import cn.toside.music.mobile.lyric.LyricPackage;
 import cn.toside.music.mobile.userApi.UserApiPackage;
@@ -35,6 +36,7 @@ public class MainApplication extends NavigationApplication {
           packages.add(new UtilsPackage());
           packages.add(new CryptoPackage());
           packages.add(new UserApiPackage());
+          packages.add(new SourceEntryPackage());
           return packages;
         }
 

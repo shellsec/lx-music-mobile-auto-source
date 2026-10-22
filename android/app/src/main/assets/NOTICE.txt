@@ -1,0 +1,21 @@
+LX Music Enhanced / 洛雪增强版
+Based on LX Music by lyswhut (https://github.com/lyswhut/lx-music)
+and LX Music Mobile (https://github.com/lyswhut/lx-music-mobile).
+Original copyright and attribution notices in upstream source files are retained.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Modifications: removed bundled source scripts and preset source addresses;
+custom sources start empty; multi-source switching is opt-in and follows
+user list order; catalog updates use only a saved user-supplied URL, with automatic failure recovery;
+updated application branding, documentation and release checks.
+
+Additional modifications: optional Android QR camera/image import and a temporary
+paired LAN configuration page for user-supplied scripts and subscription catalogs.
+QR scanning uses ZXing Android Embedded 4.3.0 (Journey Mobile) and ZXing Core
+(ZXing authors), licensed under Apache-2.0.
+https://github.com/journeyapps/zxing-android-embedded
+https://github.com/zxing/zxing
+The LAN HTTP server uses NanoHTTPD 2.3.1, BSD-3-Clause.
+https://github.com/NanoHttpd/nanohttpd
+License texts are included in Android assets as Apache-2.0.txt and
+NanoHTTPD-LICENSE.txt; this NOTICE is included with the app.

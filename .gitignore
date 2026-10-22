@@ -71,3 +71,4 @@ buck-out/
 /dist/
 /.ssh-deploy/
 /build-verification.log
+/quick-add-*.log

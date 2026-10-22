@@ -99,8 +99,8 @@ const writeCatalog = async(previous: LX.UserApi.UserApiInfo[], remote: RemoteScr
  * 拉取一次 sources.json，并在需要比对正文时才取脚本。
  * 没变化、解析失败、空响应或任一脚本取不到：不改本地名单，返回 false。
  */
-export const applyRemoteSourceFallback = async(catalogUrl: string, preserveSelection = false): Promise<boolean> => {
-  if (!/^https?:\/\//i.test(catalogUrl.trim())) return false
+export const updateRemoteCatalog = async(catalogUrl: string, preserveSelection = false, isCurrent: () => boolean = () => true): Promise<'updated' | 'unchanged' | 'unavailable'> => {
+  if (!/^https?:\/\//i.test(catalogUrl.trim())) return 'unavailable'
   const local = await collectLocalCatalog()
   let catalogText = ''
   try {
@@ -108,29 +108,35 @@ export const applyRemoteSourceFallback = async(catalogUrl: string, preserveSelec
     catalogText = await fetchText(catalogUrl.trim())
   } catch (err: any) {
     console.log('[userApi fallback] sources.json unavailable', err?.message ?? err)
-    return false
+    return 'unavailable'
   }
   const parsed = parseSourcesJson(catalogText, catalogUrl.trim())
   if (!parsed) {
     console.log('[userApi fallback] sources.json empty or invalid')
-    return false
+    return 'unavailable'
   }
   const remote: RemoteScriptEntry[] = []
   for (const item of parsed) {
+    if (!isCurrent()) return 'unavailable'
     try {
       const script = await fetchText(item.url)
       remote.push({ ...item, script })
     } catch (err: any) {
       console.log('[userApi fallback] script unavailable', item.id, err?.message ?? err)
-      return false
+      return 'unavailable'
     }
   }
   if (!catalogContentChanged(local, remote)) {
     console.log('[userApi fallback] unchanged')
-    return false
+    return 'unchanged'
   }
   const previous = await getUserApiList()
+  if (!isCurrent()) return 'unavailable'
   await writeCatalog(previous, remote, preserveSelection)
   console.log('[userApi fallback] updated')
-  return true
+  return 'updated'
+}
+
+export const applyRemoteSourceFallback = async(catalogUrl: string, preserveSelection = false): Promise<boolean> => {
+  return await updateRemoteCatalog(catalogUrl, preserveSelection) === 'updated'
 }

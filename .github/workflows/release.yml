@@ -17,7 +17,7 @@ jobs:
         run: npm run check:custom-sources && npm run test:custom-sources && npm run lint
       - name: Build all Android APKs
         working-directory: android
-        run: chmod +x gradlew && ./gradlew assembleRelease
+        run: chmod +x gradlew && ./gradlew testDebugUnitTest assembleRelease
       - name: Verify APKs
         run: python3 scripts/check-apk-sources.py
       - name: Read version and checksums

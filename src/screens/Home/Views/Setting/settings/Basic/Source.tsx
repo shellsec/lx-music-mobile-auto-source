@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { View, TextInput } from 'react-native'
 
@@ -17,6 +17,7 @@ import { useTheme } from '@/store/theme/hook'
 import { updateSetting } from '@/core/common'
 import { state as userApiState } from '@/store/userApi/state'
 import { applyRemoteSourceFallback } from '@/sources/remoteSourceFallback'
+import SourceQuickAdd from './SourceQuickAdd'
 
 const apiSourceList = apiSourceInfo.map(api => ({
   id: api.id,
@@ -58,6 +59,7 @@ const Item = ({ id, name, desc, statusLabel, change }: {
 export default memo(() => {
   const savedCatalogUrl = useSettingValue('common.sourceListUrl')
   const [catalogUrl, setCatalogUrl] = useState(savedCatalogUrl)
+  useEffect(() => { setCatalogUrl(savedCatalogUrl) }, [savedCatalogUrl])
   const [updating, setUpdating] = useState(false)
   const [updateMessage, setUpdateMessage] = useState('')
   const updateCatalog = async() => {
@@ -148,6 +150,7 @@ export default memo(() => {
       <Button disabled={updating} onPress={() => { void updateCatalog() }}>{updating ? '更新中…' : '保存并更新订阅'}</Button>
       {updateMessage ? <Text>{updateMessage}</Text> : null}
       <UserApiEditModal ref={modalRef} />
+      <SourceQuickAdd />
     </SubTitle>
   )
 })

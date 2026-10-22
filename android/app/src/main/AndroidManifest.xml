@@ -2,6 +2,9 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="cn.toside.music.mobile">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
     <!-- 获取读写外置存储权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -90,6 +93,11 @@
           <data android:pathSuffix=".lxmc" tools:targetApi="s" />
         </intent-filter>
       </activity>
+
+      <activity android:name=".sourceEntry.SourceCaptureActivity"
+        android:screenOrientation="portrait" android:stateNotNeeded="true"
+        android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"
+        android:theme="@style/zxing_CaptureTheme" />
 
       <!-- Define a FileProvider for API24+ -->
       <!-- note this is the authority name used by other modules like rn-fetch-blob, easy to have conflicts -->

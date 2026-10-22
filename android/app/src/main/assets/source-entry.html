@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>自定义源配置</title>
+<style>body{font:16px system-ui,sans-serif;max-width:560px;margin:32px auto;padding:0 20px;color:#222;background:#fff}label{display:block;margin:16px 0}input[type=url],input[type=text],select,button{box-sizing:border-box;width:100%;font:inherit;padding:12px;border:1px solid #888;border-radius:6px}button{cursor:pointer;background:#e7f3ed}button:disabled{opacity:.5}p{line-height:1.6}#message{white-space:pre-wrap;overflow-wrap:anywhere}[hidden]{display:none!important}</style></head>
+<body><h1>自定义源配置</h1><p>仅添加你信任且有权使用的内容。本软件不提供音源。添加后启用会在应用中运行源脚本。</p>
+<form id="pair"><label>请输入应用显示的六位配对码<input id="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="off"></label><button>连接设备</button></form>
+<form id="entry" hidden><label>添加类型<select id="kind"><option value="script">导入单个源</option><option value="subscription">添加订阅清单</option></select></label>
+<label>HTTP / HTTPS 地址<input id="url" type="url" maxlength="4096" required placeholder="粘贴完整链接" autocomplete="off" spellcheck="false"></label>
+<label><input id="enable" type="checkbox" checked> 添加后启用</label><button>确认添加</button></form>
+<p id="message" role="status" aria-live="polite"></p><p>服务最多持续 10 分钟。请保持应用位于设置页面且在前台；关闭后需重新扫码。</p>
+<script>
+'use strict';
+const el=id=>document.getElementById(id);
+let token=new URLSearchParams(location.hash.slice(1)).get('token')||'';
+history.replaceState(null,'',location.pathname);
+function showEntry(){el('pair').hidden=Boolean(token);el('entry').hidden=!token;}
+showEntry();
+async function send(path,values){
+  const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded',...(token?{Authorization:'Bearer '+token}:{})},body:new URLSearchParams(values).toString(),cache:'no-store'});
+  const result=await response.json();
+  if(!response.ok){if(response.status===401){token='';showEntry();}throw new Error(result.message||'请求失败，请重新配对');}
+  return result;
+}
+function bind(id,action){el(id).addEventListener('submit',async event=>{event.preventDefault();const button=el(id).querySelector('button');button.disabled=true;el('message').textContent='处理中…';try{await action();}catch(error){el('message').textContent=error.message||'连接已关闭，请在应用中重新启用网页';}finally{button.disabled=false;}});}
+bind('pair',async()=>{const result=await send('/api/pair',{code:el('code').value});token=result.token;el('code').value='';showEntry();el('message').textContent='已连接，请选择类型并添加地址';});
+bind('entry',async()=>{const url=el('url').value.trim();const parsed=new URL(url);if(!/^https?:$/.test(parsed.protocol)||/[\u0000-\u0020\u007f]/.test(url))throw new Error('请输入有效的 HTTP 或 HTTPS 地址');const result=await send('/api/import',{url,kind:el('kind').value,enable:String(el('enable').checked)});el('message').textContent=result.message;el('url').value='';});
+</script></body></html>
